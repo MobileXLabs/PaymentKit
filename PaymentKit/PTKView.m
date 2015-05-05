@@ -94,8 +94,6 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self setupCardExpiryField];
     [self setupCardCVCField];
 
-    [self.innerView addSubview:self.cardNumberField];
-
     self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, self.frame.size.height)];
     self.opaqueOverGradientView.backgroundColor = [UIColor whiteColor];
     
@@ -103,9 +101,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self.innerView addSubview:self.opaqueOverGradientView];
 
     [self addSubview:self.innerView];
-    [self addSubview:self.placeholderView];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[innerView]-|"
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[innerView]-0-|"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:@{@"innerView": self.innerView}]];
@@ -121,14 +118,50 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)setupPlaceholderView
 {
-    self.placeholderView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 0.0f, 32, 20)];
+    self.placeholderView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.placeholderView.backgroundColor = [UIColor clearColor];
     self.placeholderView.image = [UIImage imageNamed:@"placeholder"];
-
+    self.placeholderView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     CALayer *clip = [CALayer layer];
     clip.frame = CGRectMake(32, 0, 4, 20);
     clip.backgroundColor = [UIColor clearColor].CGColor;
     [self.placeholderView.layer addSublayer:clip];
+    
+    [self addSubview:self.placeholderView];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:self.placeholderView
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:self
+                                                                      attribute:NSLayoutAttributeLeft
+                                                                     multiplier:1.0f
+                                                                       constant:12.0f];
+    
+    NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:self.placeholderView
+                                                                         attribute:NSLayoutAttributeCenterY
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self
+                                                                         attribute:NSLayoutAttributeCenterY
+                                                                        multiplier:1.0f
+                                                                          constant:0.0f];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.placeholderView
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:0.0f
+                                                                        constant:32.0f];
+    
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.placeholderView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:0.0f
+                                                                         constant:20.0f];
+    
+    [self addConstraints:@[leftConstraint, centerYConstraint, widthConstraint, heightConstraint]];
 }
 
 - (void)setupCardNumberField
@@ -141,6 +174,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.cardNumberField.font = self.textFieldFont;
 
     [self.cardNumberField.layer setMasksToBounds:YES];
+    
+    [self.innerView addSubview:self.cardNumberField];
 }
 
 - (void)setupCardExpiryField
