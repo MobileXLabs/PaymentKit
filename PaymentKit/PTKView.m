@@ -79,14 +79,12 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     _isValidState = NO;
 
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
     self.textFieldFont = [UIFont systemFontOfSize:17.0f];
+    self.layer.cornerRadius = 5.0f;
+    self.layer.borderWidth = 1.0f;
+    self.layer.borderColor = [UIColor colorWithWhite:0.5f alpha:0.5f].CGColor;
     
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    backgroundImageView.image = [[UIImage imageNamed:@"textfield"]
-            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 8, 0, 8)];
-    [self addSubview:backgroundImageView];
-
     self.innerView = [[UIView alloc] initWithFrame:CGRectMake(40, 12, self.frame.size.width - 40, 20)];
     self.innerView.clipsToBounds = YES;
 
@@ -98,8 +96,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self.innerView addSubview:self.cardNumberField];
 
     self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, 34)];
-    self.opaqueOverGradientView.backgroundColor = [UIColor colorWithRed:0.9686 green:0.9686
-                                                                   blue:0.9686 alpha:1.0000];
+    self.opaqueOverGradientView.backgroundColor = [UIColor whiteColor];
+    
     self.opaqueOverGradientView.alpha = 0.0;
     [self.innerView addSubview:self.opaqueOverGradientView];
 
