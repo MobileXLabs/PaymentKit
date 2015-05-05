@@ -27,6 +27,7 @@
 		9FC5E79D1AF858F2001315F4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E79B1AF858F2001315F4 /* placeholder.png */; };
 		9FC5E79E1AF858F2001315F4 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E79C1AF858F2001315F4 /* placeholder@2x.png */; };
 		9FC5E7A01AF85920001315F4 /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E79F1AF85920001315F4 /* cvc-amex.png */; };
+		9FC5E7A21AF867C3001315F4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E7A11AF867C3001315F4 /* Images.xcassets */; };
 		FA007D1F16FA3B82006DD86E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F1A5916C19BF700835C75 /* QuartzCore.framework */; };
 		FA2A74A016BB1EDD00AF0078 /* PTKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A749F16BB1EDD00AF0078 /* PTKCard.m */; };
 		FA3A8C5A16D208E300A9C346 /* PTKUSAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3A8C5916D208E300A9C346 /* PTKUSAddressZip.m */; };
@@ -36,9 +37,6 @@
 		FA45AC7B16AE350D0003A41D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA45AC7916AE350D0003A41D /* InfoPlist.strings */; };
 		FA45AC7D16AE350D0003A41D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA45AC7C16AE350D0003A41D /* main.m */; };
 		FA45AC8116AE350D0003A41D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA45AC8016AE350D0003A41D /* AppDelegate.m */; };
-		FA45AC8316AE350D0003A41D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FA45AC8216AE350D0003A41D /* Default.png */; };
-		FA45AC8516AE350D0003A41D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA45AC8416AE350D0003A41D /* Default@2x.png */; };
-		FA45AC8716AE350E0003A41D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FA45AC8616AE350E0003A41D /* Default-568h@2x.png */; };
 		FA45AC8A16AE350E0003A41D /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA45AC8916AE350E0003A41D /* PaymentViewController.m */; };
 		FA45AC8D16AE350E0003A41D /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA45AC8B16AE350E0003A41D /* PaymentViewController.xib */; };
 		FA45ACA416AF1EE80003A41D /* PTKCardNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FA45ACA316AF1EE80003A41D /* PTKCardNumber.m */; };
@@ -84,6 +82,7 @@
 		9FC5E79B1AF858F2001315F4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		9FC5E79C1AF858F2001315F4 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		9FC5E79F1AF85920001315F4 /* cvc-amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex.png"; sourceTree = "<group>"; };
+		9FC5E7A11AF867C3001315F4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FA2A749E16BB1EDD00AF0078 /* PTKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PTKCard.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FA2A749F16BB1EDD00AF0078 /* PTKCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PTKCard.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FA3A8C5816D208E300A9C346 /* PTKUSAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTKUSAddressZip.h; sourceTree = "<group>"; };
@@ -98,9 +97,6 @@
 		FA45AC7E16AE350D0003A41D /* PaymentKit Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "PaymentKit Example-Prefix.pch"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FA45AC7F16AE350D0003A41D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FA45AC8016AE350D0003A41D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		FA45AC8216AE350D0003A41D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		FA45AC8416AE350D0003A41D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		FA45AC8616AE350E0003A41D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FA45AC8816AE350E0003A41D /* PaymentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PaymentViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FA45AC8916AE350E0003A41D /* PaymentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PaymentViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FA45AC8C16AE350E0003A41D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PaymentViewController.xib; sourceTree = "<group>"; };
@@ -210,6 +206,7 @@
 				FA6F1A5B16C1B21000835C75 /* ViewController.h */,
 				FA6F1A5C16C1B21000835C75 /* ViewController.m */,
 				FA6F1A5D16C1B21000835C75 /* ViewController.xib */,
+				9FC5E7A11AF867C3001315F4 /* Images.xcassets */,
 			);
 			path = "PaymentKit Example";
 			sourceTree = "<group>";
@@ -221,9 +218,6 @@
 				FA45AC7916AE350D0003A41D /* InfoPlist.strings */,
 				FA45AC7C16AE350D0003A41D /* main.m */,
 				FA45AC7E16AE350D0003A41D /* PaymentKit Example-Prefix.pch */,
-				FA45AC8216AE350D0003A41D /* Default.png */,
-				FA45AC8416AE350D0003A41D /* Default@2x.png */,
-				FA45AC8616AE350E0003A41D /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -382,14 +376,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA45AC7B16AE350D0003A41D /* InfoPlist.strings in Resources */,
+				9FC5E7A21AF867C3001315F4 /* Images.xcassets in Resources */,
 				9FC5E7961AF853C6001315F4 /* cvc@2x.png in Resources */,
 				9FC5E7941AF850B6001315F4 /* visa@2x.png in Resources */,
 				9FC5E7931AF850B6001315F4 /* visa.png in Resources */,
 				9FC5E78C1AF850B6001315F4 /* amex@2x.png in Resources */,
-				FA45AC8316AE350D0003A41D /* Default.png in Resources */,
 				9FC5E7981AF85433001315F4 /* cvc.png in Resources */,
-				FA45AC8516AE350D0003A41D /* Default@2x.png in Resources */,
-				FA45AC8716AE350E0003A41D /* Default-568h@2x.png in Resources */,
 				9FC5E79A1AF856EB001315F4 /* cvc-amex@2x.png in Resources */,
 				FA45AC8D16AE350E0003A41D /* PaymentViewController.xib in Resources */,
 				FA6F1A5F16C1B21000835C75 /* ViewController.xib in Resources */,
@@ -554,6 +546,8 @@
 		FA45AC9416AE350E0003A41D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PaymentKit Example/PaymentKit Example-Prefix.pch";
 				INFOPLIST_FILE = "PaymentKit Example/PaymentKit Example-Info.plist";
@@ -567,6 +561,8 @@
 		FA45AC9516AE350E0003A41D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PaymentKit Example/PaymentKit Example-Prefix.pch";
 				INFOPLIST_FILE = "PaymentKit Example/PaymentKit Example-Info.plist";
