@@ -45,4 +45,14 @@
  */
 @property (strong, nonatomic, readwrite) UIFont *textFieldFont;
 
+/**
+ *  A UIColor property to set the text color for the `cardNumberField`, `cardExpiryField`, `cardCVCField` text fields.
+ */
+@property (strong, nonatomic, readwrite) UIColor *textFieldTextColor;
+
+/**
+ *  A UIColor property to set the border of the view.
+ */
+@property (strong, nonatomic, readwrite) UIColor *borderColor;
+
 @end

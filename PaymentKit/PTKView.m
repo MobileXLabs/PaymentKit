@@ -6,10 +6,6 @@
 //  Copyright (c) 2013 Stripe. All rights reserved.
 //
 
-#define RGB(r,g,b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0f]
-#define DarkGreyColor RGB(0,0,0)
-#define RedColor RGB(253,0,17)
-
 #define kPTKViewPlaceholderViewAnimationDuration 0.25
 
 #define kPTKViewCardExpiryFieldStartX 84 + 200
@@ -80,10 +76,13 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
     self.backgroundColor = [UIColor whiteColor];
-    self.textFieldFont = [UIFont systemFontOfSize:17.0f];
+    
+    self.textFieldFont      = [UIFont systemFontOfSize:17.0f];
+    self.textFieldTextColor = [UIColor darkGrayColor];
+    self.borderColor        = [UIColor colorWithWhite:0.5f alpha:0.5f];
+    
     self.layer.cornerRadius = 5.0f;
     self.layer.borderWidth = 1.0f;
-    self.layer.borderColor = [UIColor colorWithWhite:0.5f alpha:0.5f].CGColor;
     
     self.innerView = [[UIView alloc] initWithFrame:CGRectMake(40, 12, self.frame.size.width - 40, 20)];
     self.innerView.clipsToBounds = YES;
@@ -126,7 +125,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.cardNumberField.delegate = self;
     self.cardNumberField.placeholder = [self.class localizedStringWithKey:@"placeholder.card_number" defaultValue:@"1234 5678 9012 3456"];
     self.cardNumberField.keyboardType = UIKeyboardTypeNumberPad;
-    self.cardNumberField.textColor = DarkGreyColor;
+    self.cardNumberField.textColor = self.textFieldTextColor;
     self.cardNumberField.font = self.textFieldFont;
 
     [self.cardNumberField.layer setMasksToBounds:YES];
@@ -138,7 +137,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.cardExpiryField.delegate = self;
     self.cardExpiryField.placeholder = [self.class localizedStringWithKey:@"placeholder.card_expiry" defaultValue:@"MM/YY"];
     self.cardExpiryField.keyboardType = UIKeyboardTypeNumberPad;
-    self.cardExpiryField.textColor = DarkGreyColor;
+    self.cardExpiryField.textColor = self.textFieldTextColor;
     self.cardExpiryField.font = self.textFieldFont;
 
     [self.cardExpiryField.layer setMasksToBounds:YES];
@@ -150,7 +149,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.cardCVCField.delegate = self;
     self.cardCVCField.placeholder = [self.class localizedStringWithKey:@"placeholder.card_cvc" defaultValue:@"CVC"];
     self.cardCVCField.keyboardType = UIKeyboardTypeNumberPad;
-    self.cardCVCField.textColor = DarkGreyColor;
+    self.cardCVCField.textColor = self.textFieldTextColor;
     self.cardCVCField.font = self.textFieldFont;
 
     [self.cardCVCField.layer setMasksToBounds:YES];
@@ -162,6 +161,20 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.cardNumberField.font = textFieldFont;
     self.cardExpiryField.font = textFieldFont;
     self.cardCVCField.font    = textFieldFont;
+}
+
+- (void)setTextFieldTextColor:(UIColor *)textFieldTextColor {
+    _textFieldTextColor = textFieldTextColor;
+
+    self.cardNumberField.textColor = textFieldTextColor;
+    self.cardExpiryField.textColor = textFieldTextColor;
+    self.cardCVCField.textColor    = textFieldTextColor;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    _borderColor = borderColor;
+    
+    self.layer.borderColor = borderColor.CGColor;
 }
 
 // Checks both the old and new localization table (we switched in 3/14 to PaymentKit.strings).
@@ -523,16 +536,28 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)textFieldIsValid:(UITextField *)textField
 {
-    textField.textColor = DarkGreyColor;
+    textField.textColor = self.textFieldTextColor;
     [self checkValid];
 }
 
 - (void)textFieldIsInvalid:(UITextField *)textField withErrors:(BOOL)errors
 {
     if (errors) {
-        textField.textColor = RedColor;
+        textField.textColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
+        self.layer.borderColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f].CGColor;
+
+        CAKeyframeAnimation * animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
+        CGFloat currentTx = self.transform.tx;
+        
+        animation.delegate = self;
+        animation.duration = 0.5f;
+        animation.values = @[ @(currentTx), @(currentTx + 10), @(currentTx-8), @(currentTx + 8), @(currentTx -5), @(currentTx + 5), @(currentTx) ];
+        animation.keyTimes = @[ @(0), @(0.225), @(0.425), @(0.6), @(0.75), @(0.875), @(1) ];
+        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        [self.layer addAnimation:animation forKey:@"MXLPaymentKitShakeAnimationKey"];
     } else {
-        textField.textColor = DarkGreyColor;
+        textField.textColor = self.textFieldTextColor;
+        self.layer.borderColor = self.borderColor.CGColor;
     }
 
     [self checkValid];
