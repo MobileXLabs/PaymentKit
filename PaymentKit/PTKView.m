@@ -76,7 +76,6 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     _isInitialState = YES;
     _isValidState = NO;
 
-//    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
     self.backgroundColor = [UIColor whiteColor];
     
     self.textFieldFont      = [UIFont systemFontOfSize:17.0f];
