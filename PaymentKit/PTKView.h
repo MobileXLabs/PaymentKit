@@ -14,6 +14,12 @@
 #import "PTKAddressZip.h"
 #import "PTKUSAddressZip.h"
 
+typedef NS_ENUM(NSUInteger, PTKState) {
+    PTKStateCardNumber,
+    PTKStateExpiryDate,
+    PTKStateCVC
+};
+
 @class PTKView, PTKTextField;
 
 @protocol PTKViewDelegate <NSObject>
@@ -22,6 +28,8 @@
 @end
 
 @interface PTKView : UIView
+
+- (void)transitionToState:(PTKState)state;
 
 - (BOOL)isValid;
 

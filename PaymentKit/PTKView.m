@@ -423,6 +423,27 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     [self.cardCVCField becomeFirstResponder];
 }
 
+- (void)transitionToState:(PTKState)state {
+    switch (state) {
+        case PTKStateCardNumber: {
+            [self stateCardNumber];
+            break;
+        }
+        case PTKStateExpiryDate: {
+            [self stateMeta];
+            break;
+        }
+        case PTKStateCVC: {
+            [self stateMeta];
+            [self stateCardCVC];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
+}
+
 - (BOOL)isValid
 {
     return [self.cardNumber isValid] && [self.cardExpiry isValid] &&
