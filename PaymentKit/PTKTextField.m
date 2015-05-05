@@ -22,6 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.text = kPTKTextFieldSpaceChar;
+        self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [self addObserver:self forKeyPath:@"text" options:0 context:NULL];
     }
     return self;

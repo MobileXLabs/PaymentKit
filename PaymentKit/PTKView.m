@@ -74,7 +74,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     _isInitialState = YES;
     _isValidState = NO;
 
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
+//    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 290, 46);
     self.backgroundColor = [UIColor whiteColor];
     
     self.textFieldFont      = [UIFont systemFontOfSize:17.0f];
@@ -84,9 +84,11 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.layer.cornerRadius = 5.0f;
     self.layer.borderWidth = 1.0f;
     
-    self.innerView = [[UIView alloc] initWithFrame:CGRectMake(40, 12, self.frame.size.width - 40, 20)];
+    self.innerView = [[UIView alloc] initWithFrame:CGRectZero];
     self.innerView.clipsToBounds = YES;
-
+    self.innerView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.innerView.backgroundColor = [UIColor greenColor];
+    
     [self setupPlaceholderView];
     [self setupCardNumberField];
     [self setupCardExpiryField];
@@ -94,7 +96,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
     [self.innerView addSubview:self.cardNumberField];
 
-    self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, 34)];
+    self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, self.frame.size.height)];
     self.opaqueOverGradientView.backgroundColor = [UIColor whiteColor];
     
     self.opaqueOverGradientView.alpha = 0.0;
@@ -102,6 +104,16 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
     [self addSubview:self.innerView];
     [self addSubview:self.placeholderView];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[innerView]-|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:@{@"innerView": self.innerView}]];
+
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[innerView]-0-|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:@{@"innerView": self.innerView}]];
 
     [self stateCardNumber];
 }
@@ -109,7 +121,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)setupPlaceholderView
 {
-    self.placeholderView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 13, 32, 20)];
+    self.placeholderView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 0.0f, 32, 20)];
     self.placeholderView.backgroundColor = [UIColor clearColor];
     self.placeholderView.image = [UIImage imageNamed:@"placeholder"];
 
