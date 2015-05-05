@@ -25,7 +25,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 @private
     BOOL _isInitialState;
     BOOL _isValidState;
-
+    
     NSLayoutConstraint *_numberFieldLeftConstraint;
     NSLayoutConstraint *_numberFieldWidthConstraint;
     NSLayoutConstraint *_expiryFieldLeftConstraint;
@@ -78,7 +78,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 {
     _isInitialState = YES;
     _isValidState = NO;
-
+    
     self.backgroundColor = [UIColor whiteColor];
     
     self.textFieldFont      = [UIFont systemFontOfSize:17.0f];
@@ -95,27 +95,49 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     [self setupCardNumberField];
     [self setupCardExpiryField];
     [self setupCardCVCField];
-
-    self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 9, self.frame.size.height)];
+    
+    self.opaqueOverGradientView = [[UIView alloc] initWithFrame:CGRectZero];
     self.opaqueOverGradientView.backgroundColor = [UIColor whiteColor];
+    self.opaqueOverGradientView.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.opaqueOverGradientView.alpha = 0.8f;
     [self.innerView addSubview:self.opaqueOverGradientView];
-
+    
+    [self.innerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[gradientOverlay]-0-|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"gradientOverlay": self.opaqueOverGradientView}]];
+    
+    [self.innerView addConstraint:[NSLayoutConstraint constraintWithItem:self.opaqueOverGradientView
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:0.0f
+                                                                constant:12.0f]];
+    
+    [self.innerView addConstraint:[NSLayoutConstraint constraintWithItem:self.opaqueOverGradientView
+                                                               attribute:NSLayoutAttributeLeft
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.innerView
+                                                               attribute:NSLayoutAttributeLeft
+                                                              multiplier:1.0f
+                                                                constant:0.0f]];
+    
     [self addSubview:self.innerView];
-
+    
     [self setupPlaceholderView];
-
+    
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-40-[innerView]-0-|"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:@{@"innerView": self.innerView}]];
-
+    
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[innerView]-0-|"
                                                                  options:0
                                                                  metrics:nil
                                                                    views:@{@"innerView": self.innerView}]];
-
+    
     [self stateCardNumber];
 }
 
@@ -172,7 +194,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     self.cardNumberField.keyboardType = UIKeyboardTypeNumberPad;
     self.cardNumberField.textColor = self.textFieldTextColor;
     self.cardNumberField.font = self.textFieldFont;
-
+    
     [self.cardNumberField.layer setMasksToBounds:YES];
     
     [self.innerView addSubview:self.cardNumberField];
@@ -189,7 +211,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                                            options:0
                                                                            metrics:nil
                                                                              views:@{@"cardNumberField": self.cardNumberField}]];
-
+    
     _numberFieldWidthConstraint = [NSLayoutConstraint constraintWithItem:self.cardNumberField
                                                                attribute:NSLayoutAttributeWidth
                                                                relatedBy:NSLayoutRelationEqual
@@ -210,7 +232,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     self.cardExpiryField.keyboardType = UIKeyboardTypeNumberPad;
     self.cardExpiryField.textColor = self.textFieldTextColor;
     self.cardExpiryField.font = self.textFieldFont;
-
+    
     [self.cardExpiryField.layer setMasksToBounds:YES];
     [self.innerView addSubview:self.cardExpiryField];
     
@@ -218,7 +240,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                                            options:0
                                                                            metrics:nil
                                                                              views:@{@"cardExpiryField": self.cardExpiryField}]];
-
+    
     [self.innerView addConstraint:[NSLayoutConstraint constraintWithItem:self.cardExpiryField
                                                                attribute:NSLayoutAttributeWidth
                                                                relatedBy:NSLayoutRelationEqual
@@ -247,7 +269,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     self.cardCVCField.keyboardType = UIKeyboardTypeNumberPad;
     self.cardCVCField.textColor = self.textFieldTextColor;
     self.cardCVCField.font = self.textFieldFont;
-
+    
     [self.cardCVCField.layer setMasksToBounds:YES];
     [self.innerView addSubview:self.cardCVCField];
     
@@ -263,7 +285,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                                attribute:NSLayoutAttributeWidth
                                                               multiplier:0.25f
                                                                 constant:0.0f]];
-
+    
     [self.innerView addConstraint:[NSLayoutConstraint constraintWithItem:self.cardCVCField
                                                                attribute:NSLayoutAttributeLeft
                                                                relatedBy:NSLayoutRelationEqual
@@ -271,12 +293,12 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                                attribute:NSLayoutAttributeRight
                                                               multiplier:1.0f
                                                                 constant:10.0f]];
-
+    
 }
 
 - (void)setTextFieldFont:(UIFont *)textFieldFont {
     _textFieldFont = textFieldFont;
-
+    
     self.cardNumberField.font = textFieldFont;
     self.cardExpiryField.font = textFieldFont;
     self.cardCVCField.font    = textFieldFont;
@@ -284,7 +306,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 
 - (void)setTextFieldTextColor:(UIColor *)textFieldTextColor {
     _textFieldTextColor = textFieldTextColor;
-
+    
     self.cardNumberField.textColor = textFieldTextColor;
     self.cardExpiryField.textColor = textFieldTextColor;
     self.cardCVCField.textColor    = textFieldTextColor;
@@ -309,7 +331,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
             return value;
         }
     }
-
+    
     return defaultValue;
 }
 
@@ -337,12 +359,12 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     if (!_isInitialState) {
         // Animate left
         _isInitialState = YES;
-
-        [UIView animateWithDuration:0.05 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
+        
+        [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              self.opaqueOverGradientView.alpha = 0.7f;
                          } completion:^(BOOL finished) {
-        }];
+                         }];
         
         self.cardNumberField.textAlignment = NSTextAlignmentLeft;
         
@@ -369,14 +391,14 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
             [self.innerView layoutIfNeeded];
         } completion:nil];
     }
-
+    
     [self.cardNumberField becomeFirstResponder];
 }
 
 - (void)stateMeta
 {
     _isInitialState = NO;
-
+    
     CGSize cardNumberSize;
     CGSize lastGroupSize;
     
@@ -385,11 +407,11 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     cardNumberSize = [self.cardNumber.formattedString sizeWithAttributes:attributes];
     lastGroupSize = [self.cardNumber.lastGroup sizeWithAttributes:attributes];
     
-    [UIView animateWithDuration:0.05 delay:0.35 options:UIViewAnimationOptionCurveEaseInOut
+    [UIView animateWithDuration:0.3 delay:0.35 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.opaqueOverGradientView.alpha = 1.0;
                      } completion:^(BOOL finished) {
-    }];
+                     }];
     
     [self.innerView removeConstraint:_numberFieldWidthConstraint];
     
@@ -401,10 +423,10 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                               multiplier:0.0f
                                                                 constant:cardNumberSize.width + kPTKContentLeftInset];
     [self.innerView addConstraint:_numberFieldWidthConstraint];
-
+    
     self.cardNumberField.textAlignment = NSTextAlignmentRight;
     [self.innerView layoutIfNeeded];
-
+    
     _numberFieldLeftConstraint.constant = lastGroupSize.width - cardNumberSize.width;
     
     [self.cardNumberField setNeedsUpdateConstraints];
@@ -414,7 +436,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         [self.innerView setNeedsLayout];
         [self.innerView layoutIfNeeded];
     } completion:nil];
-
+    
     [self.cardExpiryField becomeFirstResponder];
 }
 
@@ -447,7 +469,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 - (BOOL)isValid
 {
     return [self.cardNumber isValid] && [self.cardExpiry isValid] &&
-            [self.cardCVC isValidWithType:self.cardNumber.cardType];
+    [self.cardCVC isValidWithType:self.cardNumber.cardType];
 }
 
 - (PTKCard *)card
@@ -457,7 +479,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     card.cvc = [self.cardCVC string];
     card.expMonth = [self.cardExpiry month];
     card.expYear = [self.cardExpiry year];
-
+    
     return card;
 }
 
@@ -471,10 +493,10 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                              self.placeholderView.layer.opacity = 0.0;
                              self.placeholderView.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2);
                          } completion:^(BOOL finished) {
-            [previousPlaceholderView removeFromSuperview];
-        }];
+                             [previousPlaceholderView removeFromSuperview];
+                         }];
         self.placeholderView = nil;
-
+        
         [self setupPlaceholderView];
         self.placeholderView.image = image;
         self.placeholderView.layer.opacity = 0.0;
@@ -486,7 +508,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                              self.placeholderView.layer.opacity = 1.0;
                              self.placeholderView.layer.transform = CATransform3DIdentity;
                          } completion:^(BOOL finished) {
-        }];
+                         }];
     }
 }
 
@@ -494,7 +516,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 {
     PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:self.cardNumberField.text];
     PTKCardType cardType = [cardNumber cardType];
-
+    
     if (cardType == PTKCardTypeAmex) {
         [self setPlaceholderViewImage:[UIImage imageNamed:@"cvc-amex"]];
     } else {
@@ -507,7 +529,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:self.cardNumberField.text];
     PTKCardType cardType = [cardNumber cardType];
     NSString *cardTypeName = @"placeholder";
-
+    
     switch (cardType) {
         case PTKCardTypeAmex:
             cardTypeName = @"amex";
@@ -530,7 +552,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         default:
             break;
     }
-
+    
     [self setPlaceholderViewImage:[UIImage imageNamed:cardTypeName]];
 }
 
@@ -543,7 +565,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     } else {
         [self setPlaceholderToCardType];
     }
-
+    
     if ([textField isEqual:self.cardNumberField] && !_isInitialState) {
         [self stateCardNumber];
     }
@@ -554,15 +576,15 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     if ([textField isEqual:self.cardNumberField]) {
         return [self cardNumberFieldShouldChangeCharactersInRange:range replacementString:replacementString];
     }
-
+    
     if ([textField isEqual:self.cardExpiryField]) {
         return [self cardExpiryShouldChangeCharactersInRange:range replacementString:replacementString];
     }
-
+    
     if ([textField isEqual:self.cardCVCField]) {
         return [self cardCVCShouldChangeCharactersInRange:range replacementString:replacementString];
     }
-
+    
     return YES;
 }
 
@@ -579,29 +601,29 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     NSString *resultString = [self.cardNumberField.text stringByReplacingCharactersInRange:range withString:replacementString];
     resultString = [PTKTextField textByRemovingUselessSpacesFromString:resultString];
     PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:resultString];
-
+    
     if (![cardNumber isPartiallyValid])
         return NO;
-
+    
     if (replacementString.length > 0) {
         self.cardNumberField.text = [cardNumber formattedStringWithTrail];
     } else {
         self.cardNumberField.text = [cardNumber formattedString];
     }
-
+    
     [self setPlaceholderToCardType];
-
+    
     if ([cardNumber isValid]) {
         [self textFieldIsValid:self.cardNumberField];
         [self stateMeta];
-
+        
     } else if ([cardNumber isValidLength] && ![cardNumber isValidLuhn]) {
         [self textFieldIsInvalid:self.cardNumberField withErrors:YES];
-
+        
     } else if (![cardNumber isValidLength]) {
         [self textFieldIsInvalid:self.cardNumberField withErrors:NO];
     }
-
+    
     return NO;
 }
 
@@ -610,28 +632,28 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     NSString *resultString = [self.cardExpiryField.text stringByReplacingCharactersInRange:range withString:replacementString];
     resultString = [PTKTextField textByRemovingUselessSpacesFromString:resultString];
     PTKCardExpiry *cardExpiry = [PTKCardExpiry cardExpiryWithString:resultString];
-
+    
     if (![cardExpiry isPartiallyValid]) return NO;
-
+    
     // Only support shorthand year
     if ([cardExpiry formattedString].length > 5) return NO;
-
+    
     if (replacementString.length > 0) {
         self.cardExpiryField.text = [cardExpiry formattedStringWithTrail];
     } else {
         self.cardExpiryField.text = [cardExpiry formattedString];
     }
-
+    
     if ([cardExpiry isValid]) {
         [self textFieldIsValid:self.cardExpiryField];
         [self stateCardCVC];
-
+        
     } else if ([cardExpiry isValidLength] && ![cardExpiry isValidDate]) {
         [self textFieldIsInvalid:self.cardExpiryField withErrors:YES];
     } else if (![cardExpiry isValidLength]) {
         [self textFieldIsInvalid:self.cardExpiryField withErrors:NO];
     }
-
+    
     return NO;
 }
 
@@ -641,19 +663,19 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     resultString = [PTKTextField textByRemovingUselessSpacesFromString:resultString];
     PTKCardCVC *cardCVC = [PTKCardCVC cardCVCWithString:resultString];
     PTKCardType cardType = [[PTKCardNumber cardNumberWithString:self.cardNumberField.text] cardType];
-
+    
     // Restrict length
     if (![cardCVC isPartiallyValidWithType:cardType]) return NO;
-
+    
     // Strip non-digits
     self.cardCVCField.text = [cardCVC string];
-
+    
     if ([cardCVC isValidWithType:cardType]) {
         [self textFieldIsValid:self.cardCVCField];
     } else {
         [self textFieldIsInvalid:self.cardCVCField withErrors:NO];
     }
-
+    
     return NO;
 }
 
@@ -664,14 +686,14 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 {
     if ([self isValid]) {
         _isValidState = YES;
-
+        
         if ([self.delegate respondsToSelector:@selector(paymentView:withCard:isValid:)]) {
             [self.delegate paymentView:self withCard:self.card isValid:YES];
         }
-
+        
     } else if (![self isValid] && _isValidState) {
         _isValidState = NO;
-
+        
         if ([self.delegate respondsToSelector:@selector(paymentView:withCard:isValid:)]) {
             [self.delegate paymentView:self withCard:self.card isValid:NO];
         }
@@ -689,7 +711,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     if (errors) {
         textField.textColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
         self.layer.borderColor = [UIColor colorWithRed:231.0f/255.0f green:76.0f/255.0f blue:60.0f/255.0f alpha:1.0f].CGColor;
-
+        
         CAKeyframeAnimation * animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.x"];
         CGFloat currentTx = self.transform.tx;
         
@@ -703,7 +725,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         textField.textColor = self.textFieldTextColor;
         self.layer.borderColor = self.borderColor.CGColor;
     }
-
+    
     [self checkValid];
 }
 
@@ -717,7 +739,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
             return responder;
         }
     }
-
+    
     return nil;
 }
 
@@ -729,7 +751,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         return self.cardExpiryField;
     else if (![[PTKCardCVC cardCVCWithString:self.cardCVCField.text] isValid])
         return self.cardCVCField;
-
+    
     return nil;
 }
 
@@ -737,7 +759,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 {
     if (self.firstInvalidField)
         return self.firstInvalidField;
-
+    
     return self.cardCVCField;
 }
 
