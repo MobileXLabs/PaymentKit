@@ -33,7 +33,7 @@
     saveButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = saveButton;
     
-    self.paymentView = [[PTKView alloc] initWithFrame:CGRectMake(15, 25, 290, 30.0f)];
+    self.paymentView = [[PTKView alloc] initWithFrame:CGRectMake(15, 25, 330.0f, 30.0f)];
     self.paymentView.textFieldFont = [UIFont systemFontOfSize:15.0f];
     self.paymentView.delegate = self;
     

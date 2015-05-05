@@ -24,6 +24,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 @private
     BOOL _isInitialState;
     BOOL _isValidState;
+
+    NSLayoutConstraint *_numberFieldLeftConstraint;
 }
 
 @property (nonatomic, readonly, assign) UIResponder *firstResponderField;
@@ -87,7 +89,6 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     self.innerView = [[UIView alloc] initWithFrame:CGRectZero];
     self.innerView.clipsToBounds = YES;
     self.innerView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.innerView.backgroundColor = [UIColor greenColor];
     
     [self setupPlaceholderView];
     [self setupCardNumberField];
@@ -166,7 +167,8 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
 
 - (void)setupCardNumberField
 {
-    self.cardNumberField = [[PTKTextField alloc] initWithFrame:CGRectMake(12, 0, 170, 20)];
+    self.cardNumberField = [[PTKTextField alloc] initWithFrame:CGRectZero];
+    self.cardNumberField.translatesAutoresizingMaskIntoConstraints = NO;
     self.cardNumberField.delegate = self;
     self.cardNumberField.placeholder = [self.class localizedStringWithKey:@"placeholder.card_number" defaultValue:@"1234 5678 9012 3456"];
     self.cardNumberField.keyboardType = UIKeyboardTypeNumberPad;
@@ -176,6 +178,28 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self.cardNumberField.layer setMasksToBounds:YES];
     
     [self.innerView addSubview:self.cardNumberField];
+    
+    _numberFieldLeftConstraint =  [NSLayoutConstraint constraintWithItem:self.cardNumberField
+                                                               attribute:NSLayoutAttributeLeft
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.innerView
+                                                               attribute:NSLayoutAttributeLeft
+                                                              multiplier:1.0f
+                                                                constant:12.0f];
+    
+    [self.innerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[cardNumberField]-0-|"
+                                                                           options:0
+                                                                           metrics:nil
+                                                                             views:@{@"cardNumberField": self.cardNumberField}]];
+
+    [self.innerView addConstraint:[NSLayoutConstraint constraintWithItem:self.cardNumberField
+                                                               attribute:NSLayoutAttributeWidth
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.innerView
+                                                               attribute:NSLayoutAttributeWidth
+                                                              multiplier:1.0f
+                                                                constant:-12.0f]];
+    [self.innerView addConstraint:_numberFieldLeftConstraint];
 }
 
 - (void)setupCardExpiryField
@@ -283,10 +307,10 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                      self.cardCVCField.frame.origin.y,
                                      self.cardCVCField.frame.size.width,
                                      self.cardCVCField.frame.size.height);
-                             self.cardNumberField.frame = CGRectMake(12,
-                                     self.cardNumberField.frame.origin.y,
-                                     self.cardNumberField.frame.size.width,
-                                     self.cardNumberField.frame.size.height);
+
+                             _numberFieldLeftConstraint.constant = 12.0f;
+                             [self setNeedsLayout];
+                             [self layoutIfNeeded];
                          }
                          completion:^(BOOL completed) {
                              [self.cardExpiryField removeFromSuperview];
@@ -330,11 +354,11 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                 self.cardCVCField.frame.origin.y,
                 self.cardCVCField.frame.size.width,
                 self.cardCVCField.frame.size.height);
-        self.cardNumberField.frame = CGRectMake(frameX,
-                self.cardNumberField.frame.origin.y,
-                self.cardNumberField.frame.size.width,
-                self.cardNumberField.frame.size.height);
-    }                completion:nil];
+        _numberFieldLeftConstraint.constant = frameX;
+        
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
+    } completion:nil];
 
     [self addSubview:self.placeholderView];
     [self.innerView addSubview:self.cardExpiryField];
