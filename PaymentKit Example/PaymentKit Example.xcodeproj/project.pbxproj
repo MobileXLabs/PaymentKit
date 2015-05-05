@@ -11,8 +11,6 @@
 		347D16FCD9EB38A658D4B045 /* PTKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 347D1979110780A062468336 /* PTKTextField.m */; };
 		347D1C9D79EE33CD287B94EE /* PTKView.m in Sources */ = {isa = PBXBuildFile; fileRef = 347D118D23A60619342D3892 /* PTKView.m */; };
 		4A83384818B53C330035888A /* PTKComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 347D1B3599CFA227F6AB7FCA /* PTKComponent.m */; };
-		4C332B4316FA5297009C782D /* textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C332B4116FA5297009C782D /* textfield.png */; };
-		4C332B4416FA5297009C782D /* textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C332B4216FA5297009C782D /* textfield@2x.png */; };
 		9FC5E78B1AF850B6001315F4 /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E7811AF850B6001315F4 /* amex.png */; };
 		9FC5E78C1AF850B6001315F4 /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E7821AF850B6001315F4 /* amex@2x.png */; };
 		9FC5E78D1AF850B6001315F4 /* diners.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FC5E7831AF850B6001315F4 /* diners.png */; };
@@ -70,8 +68,6 @@
 		347D1979110780A062468336 /* PTKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKTextField.m; sourceTree = "<group>"; };
 		347D1B3599CFA227F6AB7FCA /* PTKComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKComponent.m; sourceTree = "<group>"; };
 		4A8CD3EB18DD327700796758 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4C332B4116FA5297009C782D /* textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textfield.png; sourceTree = "<group>"; };
-		4C332B4216FA5297009C782D /* textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "textfield@2x.png"; sourceTree = "<group>"; };
 		9FC5E7811AF850B6001315F4 /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
 		9FC5E7821AF850B6001315F4 /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
 		9FC5E7831AF850B6001315F4 /* diners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diners.png; sourceTree = "<group>"; };
@@ -168,15 +164,6 @@
 				347D1979110780A062468336 /* PTKTextField.m */,
 			);
 			name = UI;
-			sourceTree = "<group>";
-		};
-		4C332B4516FA529C009C782D /* TextField */ = {
-			isa = PBXGroup;
-			children = (
-				4C332B4116FA5297009C782D /* textfield.png */,
-				4C332B4216FA5297009C782D /* textfield@2x.png */,
-			);
-			name = TextField;
 			sourceTree = "<group>";
 		};
 		FA45AC6116AE350D0003A41D = {
@@ -293,7 +280,6 @@
 		FAA360F416C9F21C00049C6F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				4C332B4516FA529C009C782D /* TextField */,
 				FAA360F516C9F21C00049C6F /* Cards */,
 			);
 			path = Resources;
@@ -417,8 +403,6 @@
 				9FC5E78D1AF850B6001315F4 /* diners.png in Resources */,
 				9FC5E7901AF850B6001315F4 /* discover@2x.png in Resources */,
 				9FC5E78B1AF850B6001315F4 /* amex.png in Resources */,
-				4C332B4316FA5297009C782D /* textfield.png in Resources */,
-				4C332B4416FA5297009C782D /* textfield@2x.png in Resources */,
 				9FC5E78E1AF850B6001315F4 /* diners@2x.png in Resources */,
 				9FC5E7A01AF85920001315F4 /* cvc-amex.png in Resources */,
 			);
