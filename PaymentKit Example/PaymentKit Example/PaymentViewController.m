@@ -39,8 +39,6 @@
     
     [self.view addSubview:self.paymentView];
 }
-
-
 - (void) paymentView:(PTKView *)paymentView withCard:(PTKCard *)card isValid:(BOOL)valid
 {
     self.navigationItem.rightBarButtonItem.enabled = valid;
@@ -57,11 +55,10 @@
     PTKCard* card = self.paymentView.card;
     
     NSLog(@"Card last4: %@", card.last4);
-    NSLog(@"Card expiry: %lu/%lu", (unsigned long)card.expMonth, (unsigned long)card.expYear);
+    NSLog(@"Card expiry: %@/%@", self.paymentView.cardExpiry.monthString, self.paymentView.cardExpiry.yearString);
     NSLog(@"Card cvc: %@", card.cvc);
     
     [[NSUserDefaults standardUserDefaults] setValue:card.last4 forKey:@"card.last4"];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -13,6 +13,8 @@
 
 @property (nonatomic, readonly) NSUInteger month;
 @property (nonatomic, readonly) NSUInteger year;
+@property (nonatomic, readonly) NSString *yearString;
+@property (nonatomic, readonly) NSString *monthString;
 @property (nonatomic, readonly) NSString *formattedString;
 @property (nonatomic, readonly) NSString *formattedStringWithTrail;
 

@@ -171,4 +171,12 @@
     return (NSUInteger) [yearStr integerValue];
 }
 
+- (NSString *)monthString {
+    return _month;
+}
+
+- (NSString *)yearString {
+    return _year;
+}
+
 @end
