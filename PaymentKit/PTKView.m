@@ -14,8 +14,9 @@
 #define kPTKViewCardExpiryFieldEndX 84
 #define kPTKViewCardCVCFieldEndX 177
 
-static NSString *const kPTKLocalizedStringsTableName = @"PaymentKit";
-static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable";
+static NSString * const kPTKLocalizedStringsTableName = @"PaymentKit";
+static NSString * const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable";
+static CGFloat  const kPTKContentLeftInset = 12.0f;
 
 #import "PTKView.h"
 #import "PTKTextField.h"
@@ -134,7 +135,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                                                          toItem:self
                                                                       attribute:NSLayoutAttributeLeft
                                                                      multiplier:1.0f
-                                                                       constant:12.0f];
+                                                                       constant:kPTKContentLeftInset];
     
     NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:self.placeholderView
                                                                          attribute:NSLayoutAttributeCenterY
@@ -182,7 +183,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                                                   toItem:self.innerView
                                                                attribute:NSLayoutAttributeLeft
                                                               multiplier:1.0f
-                                                                constant:12.0f];
+                                                                constant:kPTKContentLeftInset];
     
     [self.innerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[cardNumberField]-0-|"
                                                                            options:0
@@ -195,7 +196,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                                                   toItem:self.innerView
                                                                attribute:NSLayoutAttributeWidth
                                                               multiplier:1.0f
-                                                                constant:-12.0f];
+                                                                constant:-kPTKContentLeftInset];
     
     [self.innerView addConstraints:@[_numberFieldLeftConstraint, _numberFieldWidthConstraint]];
 }
@@ -354,11 +355,11 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                                                       toItem:self.innerView
                                                                    attribute:NSLayoutAttributeWidth
                                                                   multiplier:1.0f
-                                                                    constant:-12.0f];
+                                                                    constant:-kPTKContentLeftInset];
         [self.innerView addConstraint:_numberFieldWidthConstraint];
         [self.innerView layoutIfNeeded];
         
-        _numberFieldLeftConstraint.constant = 12.0f;
+        _numberFieldLeftConstraint.constant = kPTKContentLeftInset;
         
         [self.cardNumberField setNeedsUpdateConstraints];
         [self.innerView addConstraint:_expiryFieldLeftConstraint];
@@ -380,7 +381,7 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     CGSize lastGroupSize;
     
     NSDictionary *attributes = @{NSFontAttributeName: self.textFieldFont};
-
+    
     cardNumberSize = [self.cardNumber.formattedString sizeWithAttributes:attributes];
     lastGroupSize = [self.cardNumber.lastGroup sizeWithAttributes:attributes];
     
@@ -398,13 +399,13 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
                                                                   toItem:nil
                                                                attribute:NSLayoutAttributeNotAnAttribute
                                                               multiplier:0.0f
-                                                                constant:cardNumberSize.width];
+                                                                constant:cardNumberSize.width + kPTKContentLeftInset];
     [self.innerView addConstraint:_numberFieldWidthConstraint];
 
     self.cardNumberField.textAlignment = NSTextAlignmentRight;
     [self.innerView layoutIfNeeded];
 
-    _numberFieldLeftConstraint.constant = (lastGroupSize.width * 1.3) - cardNumberSize.width;
+    _numberFieldLeftConstraint.constant = lastGroupSize.width - cardNumberSize.width;
     
     [self.cardNumberField setNeedsUpdateConstraints];
     [self.innerView addConstraint:_expiryFieldLeftConstraint];
