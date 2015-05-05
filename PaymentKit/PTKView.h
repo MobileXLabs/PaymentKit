@@ -40,4 +40,9 @@
 @property (nonatomic, weak) id <PTKViewDelegate> delegate;
 @property (readonly) PTKCard *card;
 
+/**
+ *  A UIFont property to set the font for the `cardNumberField`, `cardExpiryField`, `cardCVCField` text fields.
+ */
+@property (strong, nonatomic, readwrite) UIFont *textFieldFont;
+
 @end

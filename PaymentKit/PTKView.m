@@ -162,6 +162,14 @@ static NSString *const kPTKOldLocalizedStringsTableName = @"STPaymentLocalizable
     [self.cardCVCField.layer setMasksToBounds:YES];
 }
 
+- (void)setTextFieldFont:(UIFont *)textFieldFont {
+    _textFieldFont = textFieldFont;
+
+    self.cardNumberField.font = textFieldFont;
+    self.cardExpiryField.font = textFieldFont;
+    self.cardCVCField.font    = textFieldFont;
+}
+
 // Checks both the old and new localization table (we switched in 3/14 to PaymentKit.strings).
 // Leave this in for a long while to preserve compatibility.
 + (NSString *)localizedStringWithKey:(NSString *)key defaultValue:(NSString *)defaultValue
