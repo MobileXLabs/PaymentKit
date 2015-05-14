@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, PTKState) {
 @interface PTKView : UIView
 
 - (void)transitionToState:(PTKState)state;
+- (void)transitionToState:(PTKState)state becomeFirstResponder:(BOOL)shouldBecomeFirstResponder;
 
 - (BOOL)isValid;
 
