@@ -138,7 +138,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
                                                                  metrics:nil
                                                                    views:@{@"innerView": self.innerView}]];
     
-    [self stateCardNumber];
+    [self stateCardNumberBecomeFirstResponder:NO];
 }
 
 
@@ -354,7 +354,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 
 #pragma mark - State
 
-- (void)stateCardNumber
+- (void)stateCardNumberBecomeFirstResponder:(BOOL)shouldBecomeFirstResponder
 {
     if (!_isInitialState) {
         // Animate left
@@ -392,10 +392,12 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         } completion:nil];
     }
     
-    [self.cardNumberField becomeFirstResponder];
+    if (shouldBecomeFirstResponder) {
+        [self.cardNumberField becomeFirstResponder];
+    }
 }
 
-- (void)stateMeta
+- (void)stateMetaBecomeFirstResponder:(BOOL)shouldBecomeFirstResponder
 {
     _isInitialState = NO;
     
@@ -437,7 +439,9 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
         [self.innerView layoutIfNeeded];
     } completion:nil];
     
-    [self.cardExpiryField becomeFirstResponder];
+    if (shouldBecomeFirstResponder) {
+        [self.cardExpiryField becomeFirstResponder];
+    }
 }
 
 - (void)stateCardCVC
@@ -446,17 +450,21 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
 }
 
 - (void)transitionToState:(PTKState)state {
+    [self transitionToState:state becomeFirstResponder:YES];
+}
+
+- (void)transitionToState:(PTKState)state becomeFirstResponder:(BOOL)shouldBecomeFirstResponder {
     switch (state) {
         case PTKStateCardNumber: {
-            [self stateCardNumber];
+            [self stateCardNumberBecomeFirstResponder:shouldBecomeFirstResponder];
             break;
         }
         case PTKStateExpiryDate: {
-            [self stateMeta];
+            [self stateMetaBecomeFirstResponder:shouldBecomeFirstResponder];
             break;
         }
         case PTKStateCVC: {
-            [self stateMeta];
+            [self stateMetaBecomeFirstResponder:shouldBecomeFirstResponder];
             [self stateCardCVC];
             break;
         }
@@ -464,6 +472,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
             break;
         }
     }
+    
 }
 
 - (BOOL)isValid
@@ -567,7 +576,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     }
     
     if ([textField isEqual:self.cardNumberField] && !_isInitialState) {
-        [self stateCardNumber];
+        [self stateCardNumberBecomeFirstResponder:YES];
     }
 }
 
@@ -593,7 +602,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     if (textField == self.cardCVCField)
         [self.cardExpiryField becomeFirstResponder];
     else if (textField == self.cardExpiryField)
-        [self stateCardNumber];
+        [self stateCardNumberBecomeFirstResponder:YES];
 }
 
 - (BOOL)cardNumberFieldShouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)replacementString
@@ -615,7 +624,7 @@ static CGFloat  const kPTKContentLeftInset = 12.0f;
     
     if ([cardNumber isValid]) {
         [self textFieldIsValid:self.cardNumberField];
-        [self stateMeta];
+        [self stateMetaBecomeFirstResponder:YES];
         
     } else if ([cardNumber isValidLength] && ![cardNumber isValidLuhn]) {
         [self textFieldIsInvalid:self.cardNumberField withErrors:YES];
